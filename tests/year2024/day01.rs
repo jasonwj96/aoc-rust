@@ -1,22 +1,33 @@
 use aoc_rust::year2024::day01::{
+    parse,
     part1,
-    part2
-};
+    part2};
 
-const EXAMPLE: &str = "\
-3   4
-4   3
-2   5
-1   3
-3   9
-3   3";
+use std::env;
+
 
 #[test]
 fn part1_test() {
-    assert_eq!(part1(EXAMPLE), 11);
+    let cwd = env::current_dir().expect("Invalid path.");
+
+    println!("Current directory: {}", cwd.display());
+
+    let input_path = cwd.join("input/year2024/day01_test.txt");
+
+    let input = parse(input_path).expect("Input was not parsed correctly.");
+
+    assert_eq!(part1(&input).unwrap(), 11);
 }
 
 #[test]
 fn part2_test() {
-    assert_eq!(part2(EXAMPLE), 31);
+    let cwd = env::current_dir().expect("Invalid path.");
+
+    println!("Current directory: {}", cwd.display());
+
+    let input_path = cwd.join("input/year2024/day01_test.txt");
+
+    let input = parse(input_path).expect("Input was not parsed correctly.");
+
+    assert_eq!(part2(&input).unwrap(), 31);
 }

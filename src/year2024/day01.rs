@@ -28,16 +28,19 @@ pub fn parse<P: AsRef<Path>>(path: P) -> io::Result<(Vec<u32>, Vec<u32>)> {
     Ok((left, right))
 }
 
-pub fn part1<P: AsRef<Path>>(path: P) -> io::Result<u32> {
-    let (left, right) = parse(path)?;
-    Ok(left.iter().zip(right.iter()).map(|(a, b)| a.abs_diff(*b)).sum())
+pub fn part1(input: &(Vec<u32>, Vec<u32>)) -> io::Result<u32> {
+    let (left, right) = input;
+    Ok(left.iter()
+           .zip(right.iter())
+           .map(|(a, b)| a.abs_diff(*b))
+           .sum())
 }
 
-pub fn part2<P: AsRef<Path>>(path: P) -> io::Result<u32> {
-    let (left, right) = parse(path)?;
+pub fn part2(input: &(Vec<u32>, Vec<u32>)) -> io::Result<u32> {
+    let (left, right) = input;
 
     let mut freq = HashMap::new();
-    for &num in &right {
+    for &num in right {
         *freq.entry(num).or_insert(0u32) += 1;
     }
 

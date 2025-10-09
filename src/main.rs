@@ -2,7 +2,6 @@ use aoc_rust::year2024::day02::*;
 
 use std::env;
 
-
 fn main() {
     let cwd = env::current_dir().expect("Invalid path.");
     println!("Current directory: {}", cwd.display());

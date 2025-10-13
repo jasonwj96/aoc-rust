@@ -25,8 +25,10 @@ fn is_safe(row: &[u32]) -> bool {
         return true;
     }
 
-    let diffs: Vec<i32> = row.windows(2).map(|w| w[1] as i32 - w[0] as i32).collect();
-    
+    let diffs: Vec<i32> = row.windows(2)
+                             .map(|w| w[1] as i32 - w[0] as i32)
+                             .collect();
+
     let all_increasing = diffs.iter().all(|&d| d >= 1 && d <= 3);
     let all_decreasing = diffs.iter().all(|&d| d <= -1 && d >= -3);
 

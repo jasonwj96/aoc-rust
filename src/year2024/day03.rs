@@ -31,5 +31,26 @@ pub fn part1(input: &Vec<String>) -> u32 {
 }
 
 pub fn part2(input: &Vec<String>) -> u32 {
-    0
+    let re = Regex::new(r"mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\)").unwrap();
+    let mut enabled = true;
+    let mut output: u32 = 0;
+
+    for line in input {
+        for caps in re.captures_iter(line) {
+            let matched = &caps[0];
+
+            match matched {
+                "do()" => enabled = true,
+                "don't()" => enabled = false,
+                _ if enabled => {
+                    let a: u32 = caps[1].parse().unwrap();
+                    let b: u32 = caps[2].parse().unwrap();
+                    output += a * b;
+                }
+                _ => {}
+            }
+        }
+    }
+
+    output
 }

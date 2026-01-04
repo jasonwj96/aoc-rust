@@ -24,18 +24,18 @@ pub fn parse<P: AsRef<Path>>(path: P) -> io::Result<Vec<(char, u32)>> {
 
 pub fn part1(input: &[(char, u32)]) -> u32 {
     let mut dial: i32 = 50;
-    let mut result: u32 = 0;
+    let mut result = 0;
 
     for &(dir, steps) in input {
         let steps = steps as i32;
 
-        if dir == 'R' {
-            dial = (dial + steps).rem_euclid(100);
-        } else {
-            dial = (dial - steps).rem_euclid(100);
-        }
+        dial += match dir {
+            'R' => steps,
+            'L' => -steps,
+            _ => 0,
+        };
 
-        if dial == 0 {
+        if dial.rem_euclid(100) == 0 {
             result += 1;
         }
     }
@@ -44,6 +44,24 @@ pub fn part1(input: &[(char, u32)]) -> u32 {
 }
 
 
-pub fn part2(input: &[(char, u32)]) -> u32 {
-    0
+pub fn part2(input: &[(char, u32)]) -> i32 {
+    let mut dial: i32 = 50;
+    let mut result: i32 = 0;
+
+    for &(dir, steps) in input {
+        let steps = steps as i32;
+        let prev = dial;
+
+        dial += match dir {
+            'R' => steps,
+            'L' => -steps,
+            _ => 0,
+        };
+
+        // Validate lands in 0
+
+        dial = dial.rem_euclid(100);
+    }
+
+    result
 }

@@ -1,14 +1,29 @@
-use aoc_rust::year2025::day01::*;
+use aoc_rust::year2025;
+use clap::Parser;
 
-use std::env;
+#[derive(Parser)]
+#[command(author, version, about)]
+struct Args {
+    #[arg(long)]
+    year: u32,
+
+    #[arg(long)]
+    day: u32,
+}
 
 fn main() {
-    let cwd = env::current_dir().expect("Invalid path.");
-    println!("Current directory: {}", cwd.display());
+    let args = Args::parse();
 
-    let input_path = cwd.join("input/year2025/day01.txt");
-    let input = parse(input_path).expect("Input was not parsed correctly.");
+    let cwd = std::env::current_dir().expect("Invalid path");
+    let input_path =
+        cwd.join(format!("input/year{}/day{:02}.txt", args.year, args.day));
 
-    println!("Part 1: {:?}", part1(&input));
-    println!("Part 2: {:?}", part2(&input));
+    match (args.year, args.day) {
+        (2025, 1) => {
+            let input = year2025::day01::parse(input_path).unwrap();
+            println!("Part 1: {}", year2025::day01::part1(&input));
+            println!("Part 2: {}", year2025::day01::part2(&input));
+        }
+        _ => panic!("Solution not implemented."),
+    }
 }

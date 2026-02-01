@@ -15,14 +15,13 @@ fn main() {
     let args = Args::parse();
 
     let cwd = std::env::current_dir().expect("Invalid path");
-    let input_path =
-        cwd.join(format!("input/year{}/day{:02}.txt", args.year, args.day));
+    let input_path = cwd.join(format!("input/year{}/day{:02}.txt", args.year, args.day));
 
     match (args.year, args.day) {
         (2025, 1) => {
             let input = year2025::day01::parse(input_path).unwrap();
-            println!("Part 1: {}", year2025::day01::part1(&input));
-            println!("Part 2: {}", year2025::day01::part2(&input));
+            println!("Year {}, day {}, Part 1: {}",args.year, args.day, year2025::day01::part1(&input));
+            println!("Year {}, day {}, Part 2: {}",args.year, args.day, year2025::day01::part2(&input));
         }
         _ => panic!("Solution not implemented."),
     }
